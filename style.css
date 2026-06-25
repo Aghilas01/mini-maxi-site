@@ -1,69 +1,248 @@
+/* ================================================
+   MINI MAXI — Bretteville-du-Grand-Caux
+   Palette : bleu ardoise normand + blanc cassé + accent ocre
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap');
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ardoise:   #1e3a4f;   /* bleu-gris profond, ciel de Caux */
+  --ardoise-2: #2d5269;   /* ardoise clair pour hover */
+  --ocre:      #c9833a;   /* accent chaud, tuile normande */
+  --creme:     #f7f4ef;   /* fond général, pierre calcaire */
+  --blanc:     #ffffff;
+  --texte:     #2b2b2b;
+  --gris:      #6b7b8a;
+  --radius:    10px;
+  --ombre:     0 4px 18px rgba(30,58,79,.10);
+}
+
+html { scroll-behavior: smooth; }
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f4f4f4;
-  color: #333;
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  background: var(--creme);
+  color: var(--texte);
 }
 
+/* === HEADER === */
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 20px;
+  background: var(--ardoise);
+  color: var(--blanc);
+  padding: 36px 24px 24px;
   text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
 }
 
-nav {
-  margin-top: 10px;
+header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: .03em;
+  margin-bottom: 2px;
 }
+
+header > p {
+  font-size: .85rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 16px;
+}
+
+/* ligne décorative ocre sous le titre */
+header::after {
+  content: '';
+  display: block;
+  width: 54px;
+  height: 3px;
+  background: var(--ocre);
+  margin: 0 auto 16px;
+  border-radius: 2px;
+}
+
+nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 2px; }
 
 nav a {
-  color: white;
-  margin: 0 10px;
+  color: rgba(255,255,255,.82);
   text-decoration: none;
+  font-size: .88rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background .2s, color .2s;
+}
+nav a:hover {
+  background: var(--ocre);
+  color: var(--blanc);
 }
 
+/* === SECTIONS === */
 section {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 8px;
+  background: var(--blanc);
+  margin: 28px auto;
+  max-width: 860px;
+  padding: 36px 40px;
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
 }
 
 h2 {
-  border-bottom: 2px solid #2c3e50;
-  padding-bottom: 5px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.55rem;
+  color: var(--ardoise);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ocre);
+  display: inline-block;
 }
 
-/* CARROUSEL */
+p { margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+/* listes stylisées */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 16px;
+}
+ul li {
+  padding: 10px 14px 10px 44px;
+  margin-bottom: 8px;
+  background: var(--creme);
+  border-radius: 6px;
+  position: relative;
+  border-left: 3px solid var(--ocre);
+}
+ul li::before {
+  content: '✦';
+  position: absolute;
+  left: 14px;
+  color: var(--ocre);
+  font-size: .75rem;
+  top: 13px;
+}
+
+em { color: var(--gris); font-style: italic; }
+
+/* === CARROUSEL === */
 .carousel {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 
 .carousel img {
-  width: 60%;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 580px;
+  border-radius: var(--radius);
+  box-shadow: var(--ombre);
+  transition: opacity .35s ease;
+  display: block;
 }
 
-/* GALERIE */
+.carousel button {
+  background: var(--ardoise);
+  color: var(--blanc);
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .2s, transform .15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+.carousel button:hover {
+  background: var(--ocre);
+  transform: scale(1.08);
+}
+
+/* indicateurs de diapos */
+#carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+#carousel-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c5c5c5;
+  display: inline-block;
+  cursor: pointer;
+  transition: background .2s;
+}
+#carousel-dots span.active {
+  background: var(--ocre);
+}
+
+/* === GALERIE GRILLE === */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
 }
-
 .gallery-grid img {
   width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   border-radius: 8px;
+  transition: transform .25s, box-shadow .25s;
+  cursor: pointer;
+}
+.gallery-grid img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(30,58,79,.18);
 }
 
-/* FOOTER */
+/* === CONTACT === */
+#contact p {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--creme);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+#contact p strong {
+  color: var(--ardoise);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+/* === FOOTER === */
 footer {
   text-align: center;
-  padding: 15px;
-  background: #2c3e50;
-  color: white;
+  padding: 20px;
+  background: var(--ardoise);
+  color: rgba(255,255,255,.65);
+  font-size: .85rem;
+  letter-spacing: .08em;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  section { margin: 14px; padding: 24px 20px; }
+  header  { padding: 24px 16px 18px; }
+  nav a   { font-size: .82rem; padding: 5px 10px; }
+  .carousel img { max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }
